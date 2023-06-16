@@ -442,7 +442,7 @@
     function searchStudentData($keyword) {
         $query = "SELECT * from student_data WHERE
                     name LIKE '%$keyword%' OR
-                    nis LIKE '%$keyword%'";
+                    nis LIKE '%$keyword%' ORDER BY id_data DESC";
         
         return query($query);
     }
@@ -451,7 +451,7 @@
         $query = "SELECT id_student, name, email, status FROM student
         INNER JOIN student_data ON student.fk_id_data = student_data.id_data WHERE
                     name LIKE '%$keyword%' OR
-                    email LIKE '%$keyword%'";
+                    email LIKE '%$keyword%' ORDER BY id_student DESC";
 
         return query($query);
     }
