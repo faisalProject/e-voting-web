@@ -167,6 +167,7 @@
     function deleteStudentData($id_data) {
         global $conn;
 
+        mysqli_query($conn, "DELETE FROM voting WHERE fk_id_data IN (SELECT id_data FROM student_data WHERE id_data = $id_data)");
         mysqli_query($conn, "DELETE FROM candidate WHERE fk_id_data IN (SELECT id_data FROM student_data WHERE id_data = $id_data)");
         mysqli_query($conn, "DELETE FROM student WHERE fk_id_data IN (SELECT id_data FROM student_data WHERE id_data = $id_data)");
         mysqli_query($conn, "DELETE FROM student_data WHERE id_data = $id_data");

@@ -15,11 +15,11 @@
         exit;
     } else {
         $xyz = $_COOKIE['xyz'];
-        $result = mysqli_query($conn, "SELECT id_student FROM student WHERE id_student = $xyz");
+        $result = mysqli_query($conn, "SELECT id_student, fk_id_data FROM student WHERE id_student = $xyz");
         $student = mysqli_fetch_assoc($result);
         $id_student = $student['id_student'];
+        $fk_id_data = $student['fk_id_data'];
 
-        echo $id_student;
         
         $id_candidate = $_GET['id'];
         echo $id_candidate;
@@ -28,6 +28,7 @@
 
         $query = "INSERT voting VALUES(
             '',
+            '$fk_id_data',
             '$id_student', 
             '$id_candidate', 
             '$created_at', 
