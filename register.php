@@ -1,5 +1,10 @@
 <?php
+  session_start();
   require 'api/conn.php';
+
+  if ( isset($_SESSION['login']) ) {
+    header("Location: dashboard.php");
+  }
 
   if ( isset($_POST['submit']) ) {
     if ( studentRegister($_POST) > 0 ) {
