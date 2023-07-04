@@ -2,6 +2,9 @@
   session_start();
   require 'api/conn.php';
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   // check cookie
   if ( isset($_COOKIE['xyz']) && isset($_COOKIE['zyx']) ) {
     $xyz = $_COOKIE['xyz'];

@@ -15,12 +15,13 @@
     exit;
   }
 
-  $candidate_list = query("SELECT c.id_candidate, sd.name, sd.nis, c2.class_name, COUNT(v.fk_id_candidate) AS votes FROM candidate c 
-                          LEFT JOIN student_data sd ON c.fk_id_data = sd.id_data
-                          LEFT JOIN class c2 ON sd.fk_id_class = c2.id_class
-                          LEFT JOIN voting v ON c.id_candidate = v.fk_id_candidate GROUP BY c.id_candidate ORDER BY id_candidate DESC");
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
 
-
+  $candidate_list = $db->query($conn, "SELECT c.id_candidate, sd.name, sd.nis, c2.class_name, COUNT(v.fk_id_candidate) AS votes FROM candidate c 
+  LEFT JOIN student_data sd ON c.fk_id_data = sd.id_data
+  LEFT JOIN class c2 ON sd.fk_id_class = c2.id_class
+  LEFT JOIN voting v ON c.id_candidate = v.fk_id_candidate GROUP BY c.id_candidate ORDER BY id_candidate DESC");
 
 ?>
 

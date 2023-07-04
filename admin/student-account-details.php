@@ -15,9 +15,12 @@
     exit;
   }
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   $id_student = $_GET['id'];
 
-  $student_account = query("SELECT name, nis, class_name, email, status FROM student 
+  $student_account = $db->query($conn, "SELECT name, nis, class_name, email, status FROM student 
   INNER JOIN student_data ON student.fk_id_data = student_data.id_data 
   INNER JOIN class ON student_data.fk_id_class = class.id_class WHERE id_student = $id_student")[0];
 

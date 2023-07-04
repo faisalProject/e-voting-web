@@ -14,9 +14,11 @@
         exit;
     }
 
+    $db = new Voting("localhost", "root", "", "db_evoting_web");
+    $conn = $db->connect();
     $id_data = $_GET['id'];
 
-    if ( deleteStudentData($id_data) > 0 ) {
+    if ( $db->deleteStudentData($conn, $id_data) > 0 ) {
         echo "
             <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {

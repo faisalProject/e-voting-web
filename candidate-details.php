@@ -3,6 +3,9 @@
   session_start();
   require 'api/conn.php';
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   if ( !isset($_COOKIE['xyz']) && !isset($_COOKIE['zyx']) ) {
     $_SESSION = [];
     session_unset();

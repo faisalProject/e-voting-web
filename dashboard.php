@@ -3,6 +3,9 @@
   session_start();
   require 'api/conn.php';
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   if ( !isset($_COOKIE['xyz']) && !isset($_COOKIE['zyx']) ) {
     $_SESSION = [];
     session_unset();
@@ -23,7 +26,7 @@
 
     $student = mysqli_fetch_assoc($result);
 
-    $candidate_list = query("SELECT id_candidate, picture, name, nis, class_name, vision, mission FROM candidate
+    $candidate_list = $db->query($conn, "SELECT id_candidate, picture, name, nis, class_name, vision, mission FROM candidate
     INNER JOIN student ON candidate.fk_id_student = student.id_student 
     INNER JOIN student_data ON student.fk_id_data = student_data.id_data 
     INNER JOIN class ON student_data.fk_id_class = class.id_class ORDER BY id_candidate DESC");

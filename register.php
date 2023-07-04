@@ -1,13 +1,16 @@
 <?php
   session_start();
   require 'api/conn.php';
+  
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
 
   if ( isset($_SESSION['login']) ) {
     header("Location: dashboard.php");
   }
 
   if ( isset($_POST['submit']) ) {
-    if ( studentRegister($_POST) > 0 ) {
+    if ( $db->studentRegister($conn, $_POST) > 0 ) {
       echo "
           <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {

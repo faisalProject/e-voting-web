@@ -2,10 +2,12 @@
   session_start();
   require '../api/conn.php';
 
-  if (isset($_POST['register']) > 0) {
-        
-    if (register($_POST) > 0) {
-        echo "
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
+  if ( isset($_POST['submit']) ) {
+    if ( $db->register($conn, $_POST) > 0 ) {
+      echo "
           <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
               Swal.fire({
@@ -19,8 +21,7 @@
           </script>
         ";
     }
-}  
-
+  } 
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +60,7 @@
                 <i class="bi bi-eye"></i>
               </div>
             </div>
-            <button type="submit" name="register" class="register-btn">Register</button>
+            <button type="submit" name="submit" class="register-btn">Register</button>
             <p>already have an account? <a href="login.php">Sign in</a></p>
           </form>
           <div class="bottom">

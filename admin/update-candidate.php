@@ -15,14 +15,18 @@
     exit;
   }
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   $id_candidate = $_GET['id'];
-  $candidate_details = query("SELECT id_candidate, vision, mission, picture, name, nis, class_name FROM candidate 
+
+  $candidate_details = $db->query($conn, "SELECT id_candidate, vision, mission, picture, name, nis, class_name FROM candidate 
   INNER JOIN student ON candidate.fk_id_student = student.id_student 
   INNER JOIN student_data ON student.fk_id_data = student_data.id_data 
   INNER JOIN class ON student_data.fk_id_class = class.id_class WHERE id_candidate = $id_candidate")[0];
 
   if ( isset($_POST['submit']) ) {
-    if ( updateCandidate($_POST) > 0 ) {
+    if ( $db->updateCandidate($conn, $_POST) > 0 ) {
       echo "
           <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {

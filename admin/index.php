@@ -14,10 +14,13 @@
     exit;
   }
 
-  $student_data = query("SELECT * FROM student_data ORDER BY id_data DESC");
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
+  $student_data = $db->query($conn, "SELECT * FROM student_data ORDER BY id_data DESC");
 
   if ( isset($_POST['submit']) ) {
-    $student_data = searchStudentData($_POST['keyword']);
+    $student_data = $db->searchStudentData($_POST['keyword']);
   }
 
 ?>

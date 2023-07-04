@@ -15,8 +15,11 @@
     exit;
   }
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
   if ( isset($_POST['submit']) ) {
-    if ( addCandidate($_POST) > 0 ) {
+    if ( $db->addCandidate($conn, $_POST) > 0 ) {
       echo "
           <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
@@ -37,7 +40,7 @@
 
   $id_student = $_GET['id'];
 
-  $student_account = query("SELECT id_student, name, nis, class_name, email, status FROM student 
+  $student_account = $db->query($conn, "SELECT id_student, name, nis, class_name, email, status FROM student 
   INNER JOIN student_data ON student.fk_id_data = student_data.id_data 
   INNER JOIN class ON student_data.fk_id_class = class.id_class WHERE id_student = $id_student")[0];
 

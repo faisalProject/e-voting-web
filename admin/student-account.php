@@ -14,10 +14,13 @@
     exit;
   }
 
-  $student_account = query("SELECT id_student, name, email, status FROM student INNER JOIN student_data ON student.fk_id_data = student_data.id_data ORDER BY id_student DESC");
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
+  $student_account = $db->query($conn, "SELECT id_student, name, email, status FROM student INNER JOIN student_data ON student.fk_id_data = student_data.id_data ORDER BY id_student DESC");
 
   if ( isset($_POST['submit']) ) {
-    $student_account = searchStudentAccount($_POST['keyword']);
+    $student_account = $db->searchStudentAccount($_POST['keyword']);
   }
 ?>
 

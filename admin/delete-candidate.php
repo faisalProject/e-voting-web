@@ -15,9 +15,11 @@
         exit;
     }
 
+    $db = new Voting("localhost", "root", "", "db_evoting_web");
+    $conn = $db->connect();
     $id_candidate = $_GET['id_candidate'];
 
-    if ( deleteCandidate($id_candidate) > 0 ) {
+    if ( $db->deleteCandidate($conn, $id_candidate) > 0 ) {
         echo "
             <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {

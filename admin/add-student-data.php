@@ -15,10 +15,13 @@
     exit;
   }
 
-  $class = query("SELECT * FROM class");
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn = $db->connect();
+
+  $class = $db->query($conn,"SELECT * FROM class");
   
   if ( isset($_POST['submit']) ) {
-    if ( addStudentData($_POST) > 0 ) {
+    if ( $db->addStudentData($conn, $_POST) > 0 ) {
       echo "
           <script type='text/javascript'>
               document.addEventListener('DOMContentLoaded', () => {

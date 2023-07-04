@@ -15,13 +15,16 @@
     exit;
   }
 
+  $db = new Voting("localhost", "root", "", "db_evoting_web");
+  $conn =  $db->connect();
+
   $id_data = $_GET['id'];
   $result = mysqli_query($conn, "SELECT * FROM student_data INNER JOIN class ON student_data.fk_id_class = class.id_class WHERE id_data = $id_data");
   $student = mysqli_fetch_assoc($result);
-  $class = query("SELECT * FROM class");
+  $class = $db->query($conn, "SELECT * FROM class");
 
   if ( isset($_POST['submit']) ) {
-    if ( updateStudentData($_POST) > 0 ) {
+    if ( $db->updateStudentData($conn, $_POST) > 0 ) {
       echo "
           <script type='text/javascript'>
               document.addEventListener('DOMContentLoaded', () => {
