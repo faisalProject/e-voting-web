@@ -45,7 +45,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Gagal', 
-                    html: '<p class="."p-popup".">Data gagal ditambahkan!</p>',
+                    html: '<p class="."p-popup".">Data gagal diubah!</p>',
                     showConfirmButton: false,
                     timer: 2000
                 })
