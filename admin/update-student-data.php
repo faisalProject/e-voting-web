@@ -37,7 +37,7 @@
                 })
               })
           </script>
-          ";
+        ";
     } else {
       echo "
           <script type='text/javascript'>
