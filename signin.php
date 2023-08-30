@@ -38,7 +38,6 @@
       // check password
       $user = mysqli_fetch_assoc($result);
 
-      var_dump(password_verify($password, $user['password']));
       if ( password_verify($password, $user['password']) ) {
 
         // set session
