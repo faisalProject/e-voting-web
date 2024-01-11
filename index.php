@@ -50,52 +50,55 @@
         </div>
       </div>
 
-      <div class="candidate-contents" id="id-candidate-list">
-        <div class="container">
-          <div class="pagination">
-            <div class="circle prev-btn">
-              <i class="bi bi-arrow-left"></i>
+      <?php if ( !empty($candidate_list) ) : ?>
+
+        <div class="candidate-contents" id="id-candidate-list">
+          <div class="container">
+            <div class="pagination">
+              <div class="circle prev-btn">
+                <i class="bi bi-arrow-left"></i>
+              </div>
+              <div class="circle next-btn">
+                <i class="bi bi-arrow-right"></i>
+              </div>
             </div>
-            <div class="circle next-btn">
-              <i class="bi bi-arrow-right"></i>
-            </div>
-          </div>
-          <div class="candidate">
-            <div class="left card-wrapper">
-              <?php foreach ( $candidate_list as $c ) : ?>
-                <div class="card">
-                  <img src="assets/img/person.jpg" alt="">
-                  <div class="description">
-                    <div class="top">
-                      <p>Name : <?= substr($c['name'], 0, 10) ?>....</p>
-                      <p>NIS : <?= $c['nis'] ?></p>
+            <div class="candidate">
+              <div class="left card-wrapper">
+                <?php foreach ( $candidate_list as $c ) : ?>
+                  <div class="card">
+                    <img src="assets/img/person.jpg" alt="">
+                    <div class="description">
+                      <div class="top">
+                        <p>Name : <?= substr($c['name'], 0, 10) ?>....</p>
+                        <p>NIS : <?= $c['nis'] ?></p>
+                      </div>
+                      <div class="bottom">
+                        <h3 class="vision-text hidden">Vision</h3>
+                        <p><?= substr($c['vision'], 0, 45) ?>....</p>
+                        <p class="vision-description hidden"><?= substr($c['vision'], 0, 400) ?>...</p>
+                        <h3 class="mission-text hidden">Mission</h3>
+                        <p class="mission-description hidden"><?= substr($c['mission'], 0, 400) ?>...</p>
+                      </div>
                     </div>
-                    <div class="bottom">
-                      <h3 class="vision-text hidden">Vision</h3>
-                      <p><?= substr($c['vision'], 0, 45) ?>....</p>
-                      <p class="vision-description hidden"><?= substr($c['vision'], 0, 400) ?>...</p>
-                      <h3 class="mission-text hidden">Mission</h3>
-                      <p class="mission-description hidden"><?= substr($c['mission'], 0, 400) ?>...</p>
-                    </div>
+                    <a href="#id-candidate-list" class="page-scroll"></a>
                   </div>
-                  <a href="#id-candidate-list" class="page-scroll"></a>
+                <?php endforeach; ?>
+              </div>
+              <div class="right">
+                <div class="vision">
+                  <h3 class="core-vision-text">Vision</h3>
+                  <p class="core-vision-description"><?= substr($candidate_list[0]['vision'], 0, 400) ?>...</p>
                 </div>
-              <?php endforeach; ?>
-            </div>
-            <div class="right">
-              <div class="vision">
-                <h3 class="core-vision-text">Vision</h3>
-                <p class="core-vision-description"><?= substr($candidate_list[0]['vision'], 0, 400) ?>...</p>
+                <div class="mission">
+                  <h3 class="core-mission-text">Mission</h3>
+                  <p class="core-mission-description"><?= substr($candidate_list[0]['mission'], 0, 400) ?>...</p>
+                </div>
+                <button class="more">More</button>
               </div>
-              <div class="mission">
-                <h3 class="core-mission-text">Mission</h3>
-                <p class="core-mission-description"><?= substr($candidate_list[0]['mission'], 0, 400) ?>...</p>
-              </div>
-              <button class="more">More</button>
             </div>
           </div>
         </div>
-      </div>
+      <?php endif; ?>
 
       <?php 
       require 'component/mobileNavbarLandingPage.php';

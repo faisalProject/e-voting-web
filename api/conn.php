@@ -135,8 +135,7 @@
                 }
             }
 
-            $query = "INSERT INTO student_data VALUES (
-                '',
+            $query = "INSERT INTO student_data (nis, name, email, fk_id_class, created_at, updated_at) VALUES (
                 '$nis',
                 '$name',
                 '$email',
@@ -283,8 +282,7 @@
 
             $password = password_hash($password, PASSWORD_BCRYPT);
 
-            $query = "INSERT student VALUES (
-                '' ,
+            $query = "INSERT student ( fk_id_data, password, status, last_login, created_at, updated_at ) VALUES (
                 '$fk_id_data',
                 '$password',
                 '$status',
@@ -390,8 +388,7 @@
 
             // echo $fk_id_student;
 
-            $query = "INSERT INTO candidate VALUES (
-                '',
+            $query = "INSERT INTO candidate (fk_id_student, fk_id_data, vision, mission, picture, created_at, updated_at) VALUES (
                 '$fk_id_student',
                 '$fk_id_data',
                 '$vision',
